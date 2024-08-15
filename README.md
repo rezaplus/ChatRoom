@@ -1,66 +1,100 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Chat Room - Case Study
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### To-Do List for Chat Room Application Development
 
-## About Laravel
+### **1. Project Initialization**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [x]  Set up a new Laravel project.
+- [x]  Initialize a Git repository.
+- [ ]  Set up Docker with Dockerfile and docker-compose.yml.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### **2. Authentication & Authorization**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [x]  Install and configure JWT for authentication.
+- [x]  Create middleware for JWT validation.
+- [x]  Implement role-based access control (RBAC).
+- [x]  Create roles: Admin, User, Guest.
+- [x]  Write tests for JWT authentication and role-based access.
 
-## Learning Laravel
+### **3. Database Schema Design**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- [x]  Design and create migrations for:
+    - [x]  Users.
+    - [x]  Chat Rooms.
+    - [x]  Messages.
+    - [x]  Roles.
+    - [x]  Role_User (pivot table).
+- [x]  Seed database with initial data (roles, admin user, etc.).
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### **4. Chat Room Management**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- [x]  Implement API endpoints for chat room management:
+    - [x]  Create Chat Room.
+    - [x]  Delete Chat Room.
+    - [x]  View Chat Rooms.
+    - [x]  Join Chat Room (request and approval).
+- [x]  Implement caching for chat room listings.
+- [x]  Write tests for chat room APIs.
 
-## Laravel Sponsors
+### **5. Real-Time Messaging**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- [ ]  Set up Pusher for WebSocket communication.
+- [ ]  Implement real-time message broadcasting.
+- [ ]  Create events and listeners for message broadcasting.
+- [ ]  Write tests for real-time messaging.
 
-### Premium Partners
+### **6. Message Management**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- [ ]  Implement API endpoints for message management:
+    - [ ]  Send Message.
+    - [ ]  Delete Message.
+- [ ]  Implement message deletion logic (user can delete own messages, admin can delete any).
+- [ ]  Write tests for message management.
 
-## Contributing
+### **7. Scheduling & Queue Management**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- [ ]  Set up Laravel Queues.
+- [ ]  Implement job for sending notification emails on join requests.
+- [ ]  Schedule daily task to archive messages older than 30 days.
+- [ ]  Write tests for scheduled tasks and queues.
 
-## Code of Conduct
+### **8. Throttling & Rate Limiting**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- [ ]  Implement rate limiting on:
+    - [ ]  Message sending.
+    - [ ]  Chat room creation/deletion.
+    - [ ]  Join requests.
+- [ ]  Customize rate limit exceeded responses.
+- [ ]  Write tests for rate limiting.
 
-## Security Vulnerabilities
+### **9. Logging & Error Handling**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- [ ]  Set up logging for critical events (e.g., JWT errors).
+- [ ]  Implement global exception handling.
+- [ ]  Write tests for error handling.
 
-## License
+### **10. Dockerization**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- [ ]  Finalize Dockerfile and docker-compose.yml.
+- [ ]  Ensure all environment variables are correctly set up.
+- [ ]  Test Docker setup locally.
+
+### **11. Documentation**
+
+- [ ]  Write comprehensive README with setup instructions.
+- [ ]  Document API endpoints and usage examples.
+- [ ]  Include information on testing and running the application.
+
+### **12. Bonus Features (Optional)**
+
+- [ ]  Implement search functionality within messages.
+- [ ]  Add support for file attachments in messages.
+- [ ]  Develop a basic front-end interface for interacting with the API.
+- [ ]  Write additional tests for bonus features.
+
+### **13. Testing & Final Checks**
+
+- [ ]  Perform thorough testing (unit and feature tests).
+- [ ]  Review code and documentation for completeness.
+- [ ]  Push final changes to GitHub.
+- [ ]  Prepare for deployment (if required).
