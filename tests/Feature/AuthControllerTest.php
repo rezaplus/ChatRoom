@@ -3,14 +3,25 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Seed roles
+        $this->seed(\Database\Seeders\RolesTableSeeder::class);
+    }
+
+    #[Test]
     public function it_can_register_a_user()
     {
         $response = $this->postJson('/api/register', [
@@ -37,16 +48,14 @@ class AuthControllerTest extends TestCase
         ]);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_can_login_a_user()
     {
-        // Create a user
         $user = User::factory()->create([
             'email' => 'test@example.com',
-            'password' => bcrypt('password'),
+            'password' => Hash::make('password'),
         ]);
 
-        // Attempt to login
         $response = $this->postJson('/api/login', [
             'email' => 'test@example.com',
             'password' => 'password',
@@ -60,16 +69,14 @@ class AuthControllerTest extends TestCase
             ]);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_fails_to_login_with_invalid_credentials()
     {
-        // Create a user
         $user = User::factory()->create([
             'email' => 'test@example.com',
-            'password' => bcrypt('password'),
+            'password' => Hash::make('password'),
         ]);
 
-        // Attempt to login with invalid credentials
         $response = $this->postJson('/api/login', [
             'email' => 'test@example.com',
             'password' => 'wrongpassword',
@@ -81,25 +88,113 @@ class AuthControllerTest extends TestCase
             ]);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_can_logout_a_user()
     {
-        // Create a user and get a token
         $user = User::factory()->create([
             'email' => 'test@example.com',
-            'password' => bcrypt('password'),
+            'password' => Hash::make('password'),
         ]);
 
-        $token = auth()->attempt(['email' => $user->email, 'password' => 'password']);
+        $token = auth()->login($user);
 
-        // Attempt to logout
-        $response = $this->postJson('/api/logout', [], [
-            'Authorization' => "Bearer $token"
-        ]);
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer $token",
+        ])->postJson('/api/logout');
 
         $response->assertStatus(200)
             ->assertJson([
                 'message' => 'Successfully logged out'
             ]);
     }
+
+//     #[Test]
+    // public function admin_can_access_admin_routes()
+    // {
+    //     $admin = User::factory()->create([
+    //         'email' => 'admin@example.com',
+    //         'password' => Hash::make('password'),
+    //     ]);
+    //     $admin->assignRole('Admin');
+
+    //     $token = auth()->login($admin);
+
+    //     $response = $this->withHeaders([
+    //         'Authorization' => "Bearer $token",
+    //     ])->postJson('/api/chat-rooms', ['name' => 'New Chat Room']);
+
+    //     $response->assertStatus(201);
+    // }
+
+    // #[Test]
+    // public function user_cannot_access_admin_routes()
+    // {
+    //     $user = User::factory()->create([
+    //         'email' => 'user@example.com',
+    //         'password' => Hash::make('password'),
+    //     ]);
+    //     $user->assignRole('User');
+
+    //     $token = auth()->login($user);
+
+    //     $response = $this->withHeaders([
+    //         'Authorization' => "Bearer $token",
+    //     ])->postJson('/api/chat-rooms', ['name' => 'New Chat Room']);
+
+    //     $response->assertStatus(403);
+    // }
+
+    // #[Test]
+    // public function user_can_access_user_routes()
+    // {
+    //     $user = User::factory()->create([
+    //         'email' => 'user@example.com',
+    //         'password' => Hash::make('password'),
+    //     ]);
+    //     $user->assignRole('User');
+
+    //     $token = auth()->login($user);
+
+    //     $response = $this->withHeaders([
+    //         'Authorization' => "Bearer $token",
+    //     ])->postJson('/api/chat-rooms/1/messages', ['message' => 'Hello World']);
+
+    //     $response->assertStatus(201);
+    // }
+
+    // #[Test]
+    // public function guest_can_access_guest_routes()
+    // {
+    //     $guest = User::factory()->create([
+    //         'email' => 'guest@example.com',
+    //         'password' => Hash::make('password'),
+    //     ]);
+    //     $guest->assignRole('Guest');
+
+    //     $token = auth()->login($guest);
+
+    //     $response = $this->withHeaders([
+    //         'Authorization' => "Bearer $token",
+    //     ])->getJson('/api/chat-rooms');
+
+    //     $response->assertStatus(200);
+    // }
+
+    // #[Test]
+    // public function guest_cannot_access_admin_routes()
+    // {
+    //     $guest = User::factory()->create([
+    //         'email' => 'guest@example.com',
+    //         'password' => Hash::make('password'),
+    //     ]);
+    //     $guest->assignRole('Guest');
+
+    //     $token = auth()->login($guest);
+
+    //     $response = $this->withHeaders([
+    //         'Authorization' => "Bearer $token",
+    //     ])->postJson('/api/chat-rooms', ['name' => 'New Chat Room']);
+
+    //     $response->assertStatus(403);
+    // }
 }

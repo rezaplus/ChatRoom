@@ -23,6 +23,8 @@ class AuthController extends Controller
             'password' => bcrypt($validatedData['password']),
         ]);
 
+        $user->assignRole('User');
+
         $token = JWTAuth::fromUser($user);
 
         return response()->json(compact('user', 'token'), 201);
