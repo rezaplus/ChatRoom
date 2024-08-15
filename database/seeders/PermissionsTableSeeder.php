@@ -20,7 +20,7 @@ class PermissionsTableSeeder extends Seeder
             'send messages',         // For users and admins
             'delete own messages',   // For users
             'request join chat room', // For users
-            'accept users',          // For admins
+            'approve or reject join requests',          // For admins
             'delete any message',    // For admins
             'create chat room',      // For admins
             'delete chat room',      // For admins
@@ -38,7 +38,7 @@ class PermissionsTableSeeder extends Seeder
 
         $guestPermissions = ['view chat rooms'];
         $userPermissions = array_merge(['send messages', 'delete own messages', 'request join chat room'], $guestPermissions);
-        $adminPermissions = array_merge(['send messages', 'accept users', 'delete any message', 'create chat room', 'delete chat room'], $userPermissions);
+        $adminPermissions = array_merge(['accept users', 'delete any message', 'create chat room', 'delete chat room', 'approve or reject join requests'], $userPermissions);
 
 
         foreach ($guestPermissions as $permission) {

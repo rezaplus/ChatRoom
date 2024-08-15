@@ -15,6 +15,8 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required|string|min:6|same:password',
+            'role' => 'nullable|string|exists:roles,name',
         ]);
 
         $user = User::create([
@@ -23,7 +25,7 @@ class AuthController extends Controller
             'password' => bcrypt($validatedData['password']),
         ]);
 
-        $user->assignRole('User');
+        $user->assignRole($validatedData['role']);
 
         $token = JWTAuth::fromUser($user);
 

@@ -3,22 +3,18 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use App\Models\Role;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Hash;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        // Seed roles
-        $this->seed(\Database\Seeders\RolesTableSeeder::class);
     }
 
     #[Test]
@@ -29,6 +25,7 @@ class AuthControllerTest extends TestCase
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
+            'role' => 'User',
         ]);
 
         $response->assertStatus(201)

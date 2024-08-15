@@ -16,6 +16,12 @@ class RolesTableSeeder extends Seeder
         $roles = ['Admin', 'User', 'Guest'];
 
         foreach ($roles as $role) {
+
+            // skip if role already exists
+            if (Role::where('name', $role)->exists()) {
+                continue;
+            }
+
             Role::create(['name' => $role]);
         }
     }
