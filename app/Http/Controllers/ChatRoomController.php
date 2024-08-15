@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ChatRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
-
-use function Ramsey\Uuid\v1;
 
 class ChatRoomController extends Controller
 {
@@ -28,6 +27,9 @@ class ChatRoomController extends Controller
         $chatRoom->description = $request->description;
         $chatRoom->save();
 
+        // Clear chat rooms cache
+        Cache::forget('chat_rooms');
+
         return response()->json(['message' => 'Chat room created successfully', 'chat_room' => $chatRoom], 201);
     }
 
@@ -41,13 +43,20 @@ class ChatRoomController extends Controller
         }
 
         $chatRoom->delete();
+
+        // Clear chat rooms cache
+        Cache::forget('chat_rooms');
+
         return response()->json(['message' => 'Chat room deleted successfully'], 200);
     }
 
     // View all chat rooms
     public function viewChatRooms()
     {
-        $chatRooms = ChatRoom::all();
+        $chatRooms = cache()->remember('chat_rooms', 60, function () {
+            return ChatRoom::all();
+        });
+
         return response()->json(['chat_rooms' => $chatRooms], 200);
     }
 
@@ -104,6 +113,9 @@ class ChatRoomController extends Controller
 
         $user->pivot->status = $status;
         $user->pivot->save();
+
+        // Clear chat rooms cache
+        Cache::forget('chat_rooms');
 
         return response()->json(['message' => 'User request updated successfully'], 200);
     }
