@@ -87,6 +87,22 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
+     * Check if user has a permission.
+     *
+     * @param string $permission
+     * @return bool
+     */
+    public function hasPermission(string $permission): bool
+    {
+        foreach ($this->roles as $role) {
+            if ($role->hasPermission($permission)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * assign role to user.
      * 
      * @param string $role

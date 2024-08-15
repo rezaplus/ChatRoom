@@ -12,3 +12,8 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api')
 Route::post('refresh', function () {
     return response()->json(['token' => auth()->refresh()]);
 });
+
+
+Route::group(['middleware' => ['auth:api', 'permission:view chat rooms']], function () {
+    
+});
