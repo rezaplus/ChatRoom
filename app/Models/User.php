@@ -75,6 +75,15 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Role::class);
     }
 
+
+    /**
+      * get the chat rooms that belong to the user.
+      */
+    public function chatRooms()
+    {
+        return $this->belongsToMany(ChatRoom::class);
+    }
+
     /**
      * Check if user has a role.
      *
