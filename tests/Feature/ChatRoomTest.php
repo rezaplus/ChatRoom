@@ -86,6 +86,7 @@ class ChatRoomTest extends TestCase
 
         $response = $this->actingAs($this->user, 'api')->postJson("/api/chat-rooms/request-join", [
             'chat_room_id' => $chatRoom->id,
+            'user_id' => $this->user->id,
         ]);
 
         $response->assertStatus(200)
