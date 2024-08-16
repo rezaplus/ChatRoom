@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChatRoomController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,14 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/chat-rooms', [ChatRoomController::class, 'viewChatRooms'])->middleware('permission:view chat rooms');
     Route::post('/chat-rooms/request-join', [ChatRoomController::class, 'joinChatRoom'])->middleware('permission:request join chat room');
     Route::post('/chat-rooms/approve-reject-join-request', [ChatRoomController::class, 'approveOrRejectJoinRequest'])->middleware('permission:approve or reject join requests');
+    Route::get('/messages/{id}', [MessageController::class, 'viewMessages'])->middleware('permission:view chat rooms');
+    Route::post('/messages', [MessageController::class, 'send'], 'permission:send messages');
+    Route::delete('/messages/{id}', [MessageController::class, 'delete'], 'permission:delete own messages');
+});
+
+
+// test broadcast
+Route::get('/test-broadcast', function () {
+    Broadcast(new \App\Events\MessageSent(\App\Models\Message::first()));
+    return response()->json(['message' => 'Message broadcasted']);
 });

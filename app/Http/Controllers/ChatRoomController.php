@@ -120,4 +120,16 @@ class ChatRoomController extends Controller
         return response()->json(['message' => 'User request updated successfully'], 200);
     }
 
+    // get chat room details
+    public function viewChatRoom($id)
+    {
+        $chatRoom = ChatRoom::find($id);
+
+        if (!$chatRoom) {
+            return response()->json(['message' => 'Chat room not found'], 404);
+        }
+
+        return response()->json(['chat_room' => $chatRoom], 200);
+    }
+
 }

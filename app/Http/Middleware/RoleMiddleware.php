@@ -18,7 +18,7 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check() || !Auth::user()->hasRole($role)) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Sorry, you are not authorized to access this resource'], 403);
         }
 
         return $next($request);

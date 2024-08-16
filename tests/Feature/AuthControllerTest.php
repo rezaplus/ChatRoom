@@ -81,7 +81,7 @@ class AuthControllerTest extends TestCase
 
         $response->assertStatus(401)
             ->assertJson([
-                'error' => 'Unauthorized'
+                'error' => 'Invalid credentials'
             ]);
     }
 
