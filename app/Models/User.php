@@ -124,4 +124,17 @@ class User extends Authenticatable implements JWTSubject
             $this->roles()->attach($role->id);
         }
     }
+
+
+    /**
+     * check if user has access to chat room.
+     * 
+     * @param ChatRoom $chatRoom
+     * @return bool
+     */
+    public function hasAccessToChatRoom($roomId): bool
+    {
+        $chatRoom = ChatRoom::find($roomId);
+        return $this->chatRooms->contains($chatRoom);
+    }
 }

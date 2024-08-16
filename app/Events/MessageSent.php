@@ -2,9 +2,7 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -27,15 +25,16 @@ class MessageSent implements ShouldBroadcast
     /**
      * Get the channels the event should broadcast on.
      */
-    public function broadcastOn(): PrivateChannel
+    public function broadcastOn()
     {
         return new PrivateChannel('chat-room.' . $this->message->chat_room_id);
-
     }
 
+    /**
+     * Customize the event name when broadcasted.
+     */
     public function broadcastAs()
     {
         return 'MessageSent';
     }
-
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Events\MessageSent;
 use App\Models\ChatRoom;
+use Illuminate\Support\Facades\Gate;
 
 class MessageController extends Controller
 {
@@ -23,15 +24,19 @@ class MessageController extends Controller
         ]);
 
         // Broadcast the message
-        broadcast(new MessageSent($message));
+        broadcast(new MessageSent($message))->toOthers();
 
         return response()->json($message, 201);
     }
 
-    public function delete(Message $message)
+    public function delete($id)
     {
+        $message = Message::find($id);
 
-        // check message exists
+        if(!Gate::allows('delete', $message)){
+            return response()->json(['message' => 'You do not have permission to delete this message'], 403);
+        }
+
         if (!$message) {
             return response()->json(['message' => 'Message not found'], 404);
         }

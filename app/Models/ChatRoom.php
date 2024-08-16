@@ -30,4 +30,9 @@ class ChatRoom extends Model
     {
         return $this->hasMany(Message::class);
     }
+
+    public function getMessagesAttribute()
+    {
+        return $this->messages()->get();
+    }
 }

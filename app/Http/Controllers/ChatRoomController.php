@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ChatRoom;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -66,15 +67,16 @@ class ChatRoomController extends Controller
 
         $validator = Validator::make($request->all(), [
             'chat_room_id' => 'required|exists:chat_rooms,id',
+            'user_id' => 'required|exists:users,id',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 400);
         }
 
-        $chatRoom = ChatRoom::find($request->chat_room_id);
+        $user = User::find($request->user_id);
 
-        $user = Auth::user();
+        $chatRoom = ChatRoom::find($request->chat_room_id);
 
         if ($chatRoom->users()->where('user_id', $user->id)->exists()) {
             return response()->json(['message' => 'User request already sent or user is already in chat room'], 400);
@@ -129,7 +131,10 @@ class ChatRoomController extends Controller
             return response()->json(['message' => 'Chat room not found'], 404);
         }
 
-        return response()->json(['chat_room' => $chatRoom], 200);
+        // TODO: Paginate messages
+        $messages = $chatRoom->messages;
+
+        return response()->json(['chat_room' => $chatRoom, 'messages' => $messages], 200);
     }
 
 }

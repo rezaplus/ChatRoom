@@ -11,6 +11,10 @@ class Message extends Model
 
     protected $fillable = ['chat_room_id', 'user_id', 'content'];
 
+    protected $appends = ['user_name'];
+
+    // protected $hidden = ['user'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -19,5 +23,10 @@ class Message extends Model
     public function chatRoom()
     {
         return $this->belongsTo(ChatRoom::class);
+    }
+
+    public function getUserNameAttribute()
+    {
+        return $this->user->name;
     }
 }
