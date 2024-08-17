@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\NotifyAdminsOfJoinRequest;
 use App\Models\ChatRoom;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
@@ -64,25 +64,28 @@ class ChatRoomController extends Controller
     // request to join a chat room - pending status
     public function joinChatRoom(Request $request)
     {
-
+        
         $validator = Validator::make($request->all(), [
             'chat_room_id' => 'required|exists:chat_rooms,id',
             'user_id' => 'required|exists:users,id',
         ]);
-
+        
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 400);
         }
-
+        
         $user = User::find($request->user_id);
-
+        
         $chatRoom = ChatRoom::find($request->chat_room_id);
+    
+        dispatch(new NotifyAdminsOfJoinRequest($chatRoom));
 
         if ($chatRoom->users()->where('user_id', $user->id)->exists()) {
             return response()->json(['message' => 'User request already sent or user is already in chat room'], 400);
         }
 
         $chatRoom->users()->attach($user->id, ['status' => 'pending']);
+
 
         return response()->json(['message' => 'Request to join chat room sent'], 200);
     }
