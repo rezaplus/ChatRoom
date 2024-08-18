@@ -19,10 +19,10 @@ Route::post('refresh', function () {
 
 // Chat Room routes
 Route::middleware(['auth:api', 'permission:view chat rooms'])->group(function () {
-    Route::post('/chat-rooms', [ChatRoomController::class, 'createChatRoom'])->middleware('permission:create chat room')->name('chatrooms.create');
-    Route::delete('/chat-rooms/{id}', [ChatRoomController::class, 'deleteChatRoom'])->middleware('permission:delete chat room')->name('chatrooms.delete');
+    Route::post('/chat-rooms', [ChatRoomController::class, 'createChatRoom'])->middleware(['permission:create chat room', 'throttle:5,1'])->name('chatrooms.create');
+    Route::delete('/chat-rooms/{id}', [ChatRoomController::class, 'deleteChatRoom'])->middleware(['permission:delete chat room', 'throttle:5,1'])->name('chatrooms.delete');
     Route::get('/chat-rooms', [ChatRoomController::class, 'viewChatRooms'])->middleware('permission:view chat rooms')->name('chatrooms.index');
-    Route::post('/chat-rooms/request-join', [ChatRoomController::class, 'joinChatRoom'])->middleware('permission:request join chat room')->name('chatrooms.requestJoin');
+    Route::post('/chat-rooms/request-join', [ChatRoomController::class, 'joinChatRoom'])->middleware(['permission:request join chat room', 'throttle:5,1'])->name('chatrooms.requestJoin');
     Route::post('/chat-rooms/approve-reject-join-request', [ChatRoomController::class, 'approveOrRejectJoinRequest'])->middleware('permission:approve or reject join requests')->name('chatrooms.approveRejectRequest');
     Route::get('/chat-rooms/{id}', [ChatRoomController::class, 'viewChatRoom'])->middleware('permission:view chat rooms')->name('chatrooms.view');
 });
@@ -30,6 +30,6 @@ Route::middleware(['auth:api', 'permission:view chat rooms'])->group(function ()
 // Message routes
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/messages/{id}', [MessageController::class, 'viewMessages'])->middleware('permission:view chat rooms')->name('messages.index');
-    Route::post('/messages', [MessageController::class, 'send'])->middleware('permission:send messages')->name('messages.send');
+    Route::post('/messages', [MessageController::class, 'send'])->middleware(['permission:send messages', 'throttle:10,1'])->name('messages.send');
     Route::delete('/messages/{id}', [MessageController::class, 'delete'])->middleware('permission:delete own messages')->name('messages.delete');
 });
