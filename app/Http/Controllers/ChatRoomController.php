@@ -67,14 +67,14 @@ class ChatRoomController extends Controller
         
         $validator = Validator::make($request->all(), [
             'chat_room_id' => 'required|exists:chat_rooms,id',
-            'user_id' => 'required|exists:users,id',
+            'user_id' => 'nullable|exists:users,id',
         ]);
         
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 400);
         }
         
-        $user = User::find($request->user_id);
+        $user = User::find($request->user_id) ?? auth()->user();
         
         $chatRoom = ChatRoom::find($request->chat_room_id);
     
