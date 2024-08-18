@@ -57,7 +57,7 @@
         let authToken;
         let userId;
 
-        function generateColor(userId) {
+        function generateColor(userId = 0) {
             // Generate a hash from the userId
             const hash = Array.from(userId.toString())
                 .reduce((hash, char) => {
@@ -169,7 +169,8 @@
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${authToken}`,
-                    'X-Socket-ID': socketId
+                    'X-Socket-ID': socketId,
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({
                     chat_room_id: 1,  // Adjust as needed
@@ -179,9 +180,16 @@
             .then(response => response.json())
             .then(data => {
                 messageInput.value = '';
-                displayMessage(data);
+                if (data.id) {
+                    displayMessage(data);
+                } else {
+                    alert(data.message || 'Failed to send message');
+                }
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                console.error('Error:', error);
+                displayMessage('Message sending failed. Please try again.', 'fail');
+            });
         }
 
         function displayMessage(message) {
@@ -201,6 +209,7 @@
                     <a href="${routeUrl}" onclick="event.preventDefault(); deleteMessage(${messageID})">Delete</a>
                 </small>
                 `;
+
             messagesDiv.appendChild(messageElement);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
