@@ -7,15 +7,25 @@ use App\Models\Message;
 use App\Events\MessageSent;
 use App\Models\ChatRoom;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class MessageController extends Controller
 {
     public function send(Request $request)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'chat_room_id' => 'required|exists:chat_rooms,id',
             'content' => 'required|string',
         ]);
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
+
+        $validated = $validator->validated();
+
 
         $message = Message::create([
             'user_id' => $request->user()->id,
@@ -31,17 +41,23 @@ class MessageController extends Controller
 
     public function delete($id)
     {
-        $message = Message::find($id);
 
-        if(!Gate::allows('delete', $message)){
-            return response()->json(['message' => 'You do not have permission to delete this message'], 403);
+        $validator = Validator::make(['id' => $id], [
+            'id' => 'required|exists:messages,id',
+        ]);
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
         }
 
+        $message = Message::find($id);
+
         if (!$message) {
-            return response()->json(['message' => 'Message not found'], 404);
+            throw new ValidationException(['message' => 'Message not found']);
         }
 
         $message->delete();
+
         return response()->json(['message' => 'Message deleted successfully'], 200);
     }
 
@@ -49,11 +65,15 @@ class MessageController extends Controller
     public function viewMessages($id)
     {
 
-        $chatRoom = ChatRoom::find($id);
+        $validator = Validator::make(['id' => $id], [
+            'id' => 'required|exists:chat_rooms,id',
+        ]);
 
-        if (!$chatRoom) {
-            return response()->json(['message' => 'Chat room not found'], 404);
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
         }
+
+        $chatRoom = ChatRoom::find($id);
 
         $messages = $chatRoom->messages;
 

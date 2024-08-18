@@ -7,6 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class PermissionMiddleware
 {
@@ -18,7 +19,7 @@ class PermissionMiddleware
     public function handle(Request $request, Closure $next, string $permission): Response
     {
         if (!Auth::check() || !Auth::user()->hasPermission($permission)) {
-            return response()->json(['message' => 'You do not have permission to perform this action'], 403);
+            throw new UnauthorizedHttpException('','Sorry, you are not authorized to access this resource');
         }
         return $next($request);
     }

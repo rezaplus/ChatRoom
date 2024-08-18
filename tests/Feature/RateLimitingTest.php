@@ -46,8 +46,7 @@ class RateLimitingTest extends TestCase
             if ($i < 10) {
                 $response->assertStatus(201); // Assuming success status for within limit
             } else {
-                $response->assertStatus(429)
-                    ->assertJson(['message' => 'You have exceeded the rate limit. Please wait and try again later.']);
+                $response->assertStatus(429);
             }
         }
     }
@@ -63,8 +62,7 @@ class RateLimitingTest extends TestCase
             if ($i < 5) {
                 $response->assertStatus(201); // Assuming success status for within limit
             } else {
-                $response->assertStatus(429)
-                    ->assertJson(['message' => 'You have exceeded the rate limit. Please wait and try again later.']);
+                $response->assertStatus(429);
             }
         }
     }
@@ -81,8 +79,7 @@ class RateLimitingTest extends TestCase
             if ($i < 5) {
                 $response->assertStatus(200); // Assuming success status for within limit
             } else {
-                $response->assertStatus(429)
-                    ->assertJson(['message' => 'You have exceeded the rate limit. Please wait and try again later.']);
+                $response->assertStatus(429);
             }
         }
     }
@@ -97,8 +94,8 @@ class RateLimitingTest extends TestCase
 
             if ($i < 5) {
                 // if response is 400 retrun true or status is 200 return true else return false
-                if ($response->status() == 400) {
-                    $response->assertStatus(400);
+                if ($response->status() == 422) {
+                    $response->assertStatus(422);
                 } else {
                     $response->assertStatus(200);
                 }

@@ -31,5 +31,5 @@ Route::middleware(['auth:api', 'permission:view chat rooms'])->group(function ()
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/messages/{id}', [MessageController::class, 'viewMessages'])->middleware('permission:view chat rooms')->name('messages.index');
     Route::post('/messages', [MessageController::class, 'send'])->middleware(['permission:send messages', 'throttle:10,1'])->name('messages.send');
-    Route::delete('/messages/{id}', [MessageController::class, 'delete'])->middleware('permission:delete own messages')->name('messages.delete');
+    Route::delete('/messages/{id}', [MessageController::class, 'delete'])->middleware(['can:delete,messages'])->name('messages.delete');
 });

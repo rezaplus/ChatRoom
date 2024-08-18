@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Jobs\NotifyAdminsOfJoinRequest;
 use App\Models\ChatRoom;
 use App\Models\User;
+use App\Rules\NotInChatRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class ChatRoomController extends Controller
 {
@@ -20,7 +22,7 @@ class ChatRoomController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 400);
+            throw new ValidationException($validator);
         }
 
         $chatRoom = new ChatRoom();
@@ -37,11 +39,16 @@ class ChatRoomController extends Controller
     // Delete a chat room
     public function deleteChatRoom($id)
     {
-        $chatRoom = ChatRoom::find($id);
 
-        if (!$chatRoom) {
-            return response()->json(['message' => 'Chat room not found'], 404);
+        $validator = Validator::make(['id' => $id], [
+            'id' => 'required|exists:chat_rooms,id',
+        ]);
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
         }
+
+        $chatRoom = ChatRoom::find($id);
 
         $chatRoom->delete();
 
@@ -67,11 +74,15 @@ class ChatRoomController extends Controller
         
         $validator = Validator::make($request->all(), [
             'chat_room_id' => 'required|exists:chat_rooms,id',
-            'user_id' => 'nullable|exists:users,id',
+            'user_id' => [
+                'required',
+                'exists:users,id',
+                new NotInChatRoom($request->chat_room_id)
+            ]
         ]);
         
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 400);
+            throw new ValidationException($validator);
         }
         
         $user = User::find($request->user_id) ?? auth()->user();
@@ -79,10 +90,6 @@ class ChatRoomController extends Controller
         $chatRoom = ChatRoom::find($request->chat_room_id);
     
         dispatch(new NotifyAdminsOfJoinRequest($chatRoom));
-
-        if ($chatRoom->users()->where('user_id', $user->id)->exists()) {
-            return response()->json(['message' => 'User request already sent or user is already in chat room'], 400);
-        }
 
         $chatRoom->users()->attach($user->id, ['status' => 'pending']);
 
@@ -101,7 +108,7 @@ class ChatRoomController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 400);
+            throw new ValidationException($validator);
         }
 
         $status = $request->status;
@@ -128,11 +135,16 @@ class ChatRoomController extends Controller
     // get chat room details
     public function viewChatRoom($id)
     {
-        $chatRoom = ChatRoom::find($id);
 
-        if (!$chatRoom) {
-            return response()->json(['message' => 'Chat room not found'], 404);
+        $validator = Validator::make(['id' => $id], [
+            'id' => 'required|exists:chat_rooms,id',
+        ]);
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
         }
+
+        $chatRoom = ChatRoom::find($id);
 
         // TODO: Paginate messages
         $messages = $chatRoom->messages;

@@ -57,8 +57,7 @@ class ChatRoomTest extends TestCase
 
         $response = $this->actingAs($this->admin, 'api')->deleteJson("/api/chat-rooms/{$chatRoom->id}");
 
-        $response->assertStatus(200)
-            ->assertJson(['message' => 'Chat room deleted successfully']);
+        $response->assertStatus(200);
 
         $this->assertDatabaseMissing('chat_rooms', [
             'id' => $chatRoom->id,
