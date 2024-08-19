@@ -58,7 +58,13 @@ Ensure you have the following installed on your machine:
 8. **Build and run Docker containers:**
 
    ``
-   docker-compose up --build
+   sudo docker-compose up --build
+   ``
+
+9. ** Test the application:**
+
+   ``
+   php artisan test
    ``
 
 ## Usage
