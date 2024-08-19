@@ -76,6 +76,9 @@ Once the containers are up and running, you can access the application at `http:
 - **Permission Issues:** Ensure that your `database` directory has the correct permissions for SQLite file creation.
 - **JWT Issues:** If you encounter issues with JWT, ensure that your `.env` file has the correct configuration for the JWT secret key.
 
+## API Endpoints Documentation
+For detailed API documentation, you can refer to the [Postman Documentation](https://documenter.getpostman.com/view/25233262/2sA3s9E8ii#auth-info-1c9ffa0d-5a9c-4647-a7a1-6671bf169bd7).
+
 ##
 
 # To-Do List for Chat Room Application Development
