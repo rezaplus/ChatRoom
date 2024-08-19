@@ -61,7 +61,7 @@ Ensure you have the following installed on your machine:
    sudo docker-compose up --build
    ``
 
-9. ** Test the application:**
+9. **Test the application:**
 
    ``
    php artisan test
