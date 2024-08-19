@@ -1,12 +1,84 @@
-# Chat Room - Case Study
+# Chat Room Application
 
-### To-Do List for Chat Room Application Development
+Welcome to the Chat Room Application! This is a Laravel-based project designed to provide a real-time chat experience. Follow the instructions below to set up and run the application.
+
+## Prerequisites
+
+Ensure you have the following installed on your machine:
+
+- PHP 8.2 or higher
+- Composer
+- Docker and Docker Compose
+
+## Installation
+
+1. **Clone the repository:**
+
+   ``
+   git clone <repository-url>
+   cd <repository-directory>
+   ``
+
+2. **Install PHP dependencies:**
+
+   ``
+   composer update
+   ``
+
+3. **Create the SQLite database file:**
+
+   ``
+   touch database/database.sqlite
+   ``
+
+4. **Set up the environment file:**
+
+   ``
+   cp .env.example .env
+   ``
+
+5. **Generate the application key:**
+
+   ``
+   php artisan key:generate
+   ``
+
+6. **Generate the JWT secret key:**
+
+   ``
+   php artisan jwt:secret
+   ``
+
+7. **Run migrations and seed the database:**
+
+   ``
+   php artisan migrate --seed
+   ``
+
+8. **Build and run Docker containers:**
+
+   ``
+   docker-compose up --build
+   ``
+
+## Usage
+
+Once the containers are up and running, you can access the application at `http://localhost:8000`. The chat room should be fully operational, and you can start using the features right away.
+
+## Troubleshooting
+
+- **Permission Issues:** Ensure that your `database` directory has the correct permissions for SQLite file creation.
+- **JWT Issues:** If you encounter issues with JWT, ensure that your `.env` file has the correct configuration for the JWT secret key.
+
+##
+
+# To-Do List for Chat Room Application Development
 
 ### **1. Project Initialization**
 
 - [x]  Set up a new Laravel project.
 - [x]  Initialize a Git repository.
-- [ ]  Set up Docker with Dockerfile and docker-compose.yml.
+- [x]  Set up Docker with Dockerfile and docker-compose.yml.
 
 ### **2. Authentication & Authorization**
 
@@ -38,63 +110,61 @@
 
 ### **5. Real-Time Messaging**
 
-- [ ]  Set up Pusher for WebSocket communication.
-- [ ]  Implement real-time message broadcasting.
-- [ ]  Create events and listeners for message broadcasting.
-- [ ]  Write tests for real-time messaging.
+- [x]  Set up Pusher for WebSocket communication.
+- [x]  Implement real-time message broadcasting.
+- [x]  Create events and listeners for message broadcasting.
+- [x]  Write tests for real-time messaging.
 
 ### **6. Message Management**
 
-- [ ]  Implement API endpoints for message management:
-    - [ ]  Send Message.
-    - [ ]  Delete Message.
-- [ ]  Implement message deletion logic (user can delete own messages, admin can delete any).
-- [ ]  Write tests for message management.
+- [x]  Implement API endpoints for message management:
+    - [x]  Send Message.
+    - [x]  Delete Message.
+- [x]  Implement message deletion logic (user can delete own messages, admin can delete any).
+- [x]  Write tests for message management.
 
 ### **7. Scheduling & Queue Management**
 
-- [ ]  Set up Laravel Queues.
-- [ ]  Implement job for sending notification emails on join requests.
-- [ ]  Schedule daily task to archive messages older than 30 days.
-- [ ]  Write tests for scheduled tasks and queues.
+- [x]  Set up Laravel Queues.
+- [x]  Implement job for sending notification emails on join requests.
+- [x]  Schedule daily task to archive messages older than 30 days.
+- [x]  Write tests for scheduled tasks and queues.
 
 ### **8. Throttling & Rate Limiting**
 
-- [ ]  Implement rate limiting on:
-    - [ ]  Message sending.
-    - [ ]  Chat room creation/deletion.
-    - [ ]  Join requests.
-- [ ]  Customize rate limit exceeded responses.
-- [ ]  Write tests for rate limiting.
+- [x]  Implement rate limiting on:
+    - [x]  Message sending.
+    - [x]  Chat room creation/deletion.
+    - [x]  Join requests.
+- [x]  Customize rate limit exceeded responses.
+- [x]  Write tests for rate limiting.
 
 ### **9. Logging & Error Handling**
 
-- [ ]  Set up logging for critical events (e.g., JWT errors).
-- [ ]  Implement global exception handling.
-- [ ]  Write tests for error handling.
+- [x]  Set up logging for critical events (e.g., JWT errors).
+- [x]  Implement global exception handling.
+- [x]  Write tests for error handling.
 
 ### **10. Dockerization**
 
-- [ ]  Finalize Dockerfile and docker-compose.yml.
-- [ ]  Ensure all environment variables are correctly set up.
-- [ ]  Test Docker setup locally.
+- [x]  Finalize Dockerfile and docker-compose.yml.
+- [x]  Ensure all environment variables are correctly set up.
+- [x]  Test Docker setup locally.
 
 ### **11. Documentation**
 
-- [ ]  Write comprehensive README with setup instructions.
-- [ ]  Document API endpoints and usage examples.
-- [ ]  Include information on testing and running the application.
+- [x]  Write comprehensive README with setup instructions.
+- [x]  Document API endpoints and usage examples.
+- [x]  Include information on testing and running the application.
 
 ### **12. Bonus Features (Optional)**
 
 - [ ]  Implement search functionality within messages.
 - [ ]  Add support for file attachments in messages.
-- [ ]  Develop a basic front-end interface for interacting with the API.
+- [x]  Develop a basic front-end interface for interacting with the API.
 - [ ]  Write additional tests for bonus features.
 
 ### **13. Testing & Final Checks**
 
-- [ ]  Perform thorough testing (unit and feature tests).
-- [ ]  Review code and documentation for completeness.
-- [ ]  Push final changes to GitHub.
-- [ ]  Prepare for deployment (if required).
+- [x]  Perform thorough testing (unit and feature tests).
+- [x]  Push final changes to GitHub.
