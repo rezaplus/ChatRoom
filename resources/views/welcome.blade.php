@@ -28,11 +28,11 @@
             <h2>Login</h2>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" id="email" placeholder="Enter your email" value="rezahajizade22@gmail.com">
+                <input type="text" class="form-control" id="email" placeholder="Enter your email" value="admin@example.com">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter your password" value="somethinghard">
+                <input type="password" class="form-control" id="password" placeholder="Enter your password" value="password">
             </div>
             <button class="btn btn-primary" onclick="login()">Login</button>
         </div>

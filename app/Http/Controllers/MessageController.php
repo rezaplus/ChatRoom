@@ -52,9 +52,11 @@ class MessageController extends Controller
 
         $message = Message::find($id);
 
-        if (!$message) {
-            throw new ValidationException(['message' => 'Message not found']);
+        // check if user is authorized to delete the message
+        if (Gate::denies('delete', $message)) {
+            throw new UnauthorizedHttpException('','You are not authorized to delete this message');
         }
+
 
         $message->delete();
 

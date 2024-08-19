@@ -1,0 +1,93 @@
+2024-08-19 05:51:47,105 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 05:51:47,114 INFO supervisord started with pid 1
+2024-08-19 05:51:47,144 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 05:51:47,155 INFO supervisord started with pid 1
+2024-08-19 05:51:48,122 INFO spawned: 'laravel_queue' with pid 7
+2024-08-19 05:51:48,130 INFO spawned: 'laravel_scheduler' with pid 8
+2024-08-19 05:51:48,163 INFO spawned: 'laravel_queue' with pid 6
+2024-08-19 05:51:48,171 INFO spawned: 'laravel_scheduler' with pid 7
+2024-08-19 05:51:49,135 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 05:51:49,136 INFO success: laravel_scheduler entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 05:51:49,176 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 05:51:49,178 INFO success: laravel_scheduler entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 05:53:26,258 WARN received SIGQUIT indicating exit request
+2024-08-19 05:53:26,259 WARN received SIGQUIT indicating exit request
+2024-08-19 05:53:26,262 INFO waiting for laravel_queue, laravel_scheduler to die
+2024-08-19 05:53:26,263 INFO waiting for laravel_queue, laravel_scheduler to die
+2024-08-19 05:53:26,265 WARN stopped: laravel_scheduler (terminated by SIGTERM)
+2024-08-19 05:53:32,710 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 05:53:32,710 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 05:53:32,721 INFO supervisord started with pid 1
+2024-08-19 05:53:32,722 INFO supervisord started with pid 1
+2024-08-19 05:53:33,727 INFO spawned: 'laravel_queue' with pid 7
+2024-08-19 05:53:33,727 INFO spawned: 'laravel_queue' with pid 7
+2024-08-19 05:53:33,739 INFO spawned: 'laravel_scheduler' with pid 8
+2024-08-19 05:53:33,740 INFO spawned: 'laravel_scheduler' with pid 8
+2024-08-19 05:53:34,759 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 05:53:34,762 INFO success: laravel_scheduler entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 05:53:34,769 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 05:53:34,772 INFO success: laravel_scheduler entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 05:54:27,043 WARN received SIGQUIT indicating exit request
+2024-08-19 05:54:27,044 WARN received SIGQUIT indicating exit request
+2024-08-19 05:54:27,045 INFO waiting for laravel_queue, laravel_scheduler to die
+2024-08-19 05:54:27,047 INFO waiting for laravel_queue, laravel_scheduler to die
+2024-08-19 05:54:27,049 WARN stopped: laravel_scheduler (terminated by SIGTERM)
+2024-08-19 05:54:27,050 WARN stopped: laravel_scheduler (terminated by SIGTERM)
+2024-08-19 05:54:28,056 WARN stopped: laravel_queue (terminated by SIGTERM)
+2024-08-19 05:54:28,056 WARN stopped: laravel_queue (terminated by SIGTERM)
+2024-08-19 05:54:30,866 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 05:54:30,873 INFO supervisord started with pid 1
+2024-08-19 05:54:30,879 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+2024-08-19 05:54:30,887 INFO supervisord started with pid 1
+2024-08-19 05:54:31,882 INFO spawned: 'laravel_queue' with pid 7
+2024-08-19 05:54:31,892 INFO spawned: 'laravel_scheduler' with pid 8
+2024-08-19 05:54:31,892 INFO spawned: 'laravel_queue' with pid 7
+2024-08-19 05:54:31,900 INFO spawned: 'laravel_scheduler' with pid 8
+2024-08-19 05:54:32,897 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 05:54:32,899 INFO success: laravel_scheduler entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 05:54:32,904 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 05:54:32,905 INFO success: laravel_scheduler entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 05:57:10,481 WARN received SIGQUIT indicating exit request
+2024-08-19 05:57:10,500 INFO waiting for laravel_queue, laravel_scheduler to die
+2024-08-19 05:57:10,503 WARN stopped: laravel_scheduler (terminated by SIGTERM)
+2024-08-19 05:57:11,514 WARN stopped: laravel_queue (terminated by SIGTERM)
+2024-08-19 06:35:57,421 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:35:57,575 INFO spawned: 'laravel_queue' with pid 183
+2024-08-19 06:35:58,579 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 06:48:13,898 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:48:13,912 INFO spawned: 'laravel_queue' with pid 240
+2024-08-19 06:48:14,918 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 06:48:15,214 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:48:16,221 INFO spawned: 'laravel_queue' with pid 245
+2024-08-19 06:48:17,146 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:48:18,157 INFO spawned: 'laravel_queue' with pid 250
+2024-08-19 06:48:18,974 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:48:20,982 INFO spawned: 'laravel_queue' with pid 255
+2024-08-19 06:48:21,984 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 06:48:22,214 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:48:23,223 INFO spawned: 'laravel_queue' with pid 260
+2024-08-19 06:48:24,228 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 06:48:24,377 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:48:25,384 INFO spawned: 'laravel_queue' with pid 265
+2024-08-19 06:48:26,387 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 06:48:26,537 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:48:27,545 INFO spawned: 'laravel_queue' with pid 270
+2024-08-19 06:48:28,486 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:48:29,492 INFO spawned: 'laravel_queue' with pid 275
+2024-08-19 06:48:30,452 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:48:32,463 INFO spawned: 'laravel_queue' with pid 280
+2024-08-19 06:48:33,374 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:48:36,383 INFO spawned: 'laravel_queue' with pid 285
+2024-08-19 06:48:37,389 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 06:48:37,953 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:48:38,958 INFO spawned: 'laravel_queue' with pid 290
+2024-08-19 06:48:39,963 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 06:48:40,481 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:48:41,489 INFO spawned: 'laravel_queue' with pid 295
+2024-08-19 06:48:42,494 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 06:48:42,785 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 06:48:43,789 INFO spawned: 'laravel_queue' with pid 300
+2024-08-19 06:48:44,793 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2024-08-19 07:03:52,648 WARN exited: laravel_queue (exit status 1; not expected)
+2024-08-19 07:03:53,671 INFO spawned: 'laravel_queue' with pid 371
+2024-08-19 07:03:54,677 INFO success: laravel_queue entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
