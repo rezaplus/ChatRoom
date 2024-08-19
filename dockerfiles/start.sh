@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Default role is 'app'
 ROLE=${CONTAINER_ROLE:-app}
 
