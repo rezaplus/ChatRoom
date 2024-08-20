@@ -1,4 +1,4 @@
-# Chat Room Application
+# Chat Room Application | Laravel 11
 
 Welcome to the Chat Room Application! This is a Laravel-based project designed to provide a real-time chat experience. Follow the instructions below to set up and run the application.
 
